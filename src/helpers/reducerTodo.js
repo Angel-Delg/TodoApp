@@ -4,7 +4,7 @@ export const reducerTodo = (initialState = [], action ) => {
             return [ ...initialState, action.description ]
 
         case '[TODO]: remove todo':
-            return initialState
+            return initialState.filter( todo => todo.id !== action.description)
 
         case '[TODO]: toogle  todo':
             return initialState

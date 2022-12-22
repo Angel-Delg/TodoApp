@@ -3,8 +3,8 @@ import { TodoList } from "./components/TodoList"
 import { useTodo } from "./hooks/useTodo"
 
 export const TodoApp = () => {
-    
-    const { todos, handleAddTodo } = useTodo()
+
+    const { todos,allTodos ,handleAddTodo, handleRemoveTodo } = useTodo()
 
     return (
         <div className="container-xl container-xl-fluid m-auto row ">
@@ -12,8 +12,10 @@ export const TodoApp = () => {
                 Todo App
             </h2>
 
+            { todos.length > 0 && <h3 className='alert-secondary'> Total de tareas: { allTodos } </h3>}
+
             <section className="col-7">
-                <TodoList todos={ todos } />
+                <TodoList todos={ todos } handleRemove={ handleRemoveTodo }/>
             </section>
 
             <section className="col-5">

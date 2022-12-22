@@ -1,8 +1,17 @@
 import { useReducer, useEffect } from 'react'
 import { reducerTodo } from '../helpers/reducerTodo'
 
+const initializer = () => {
+    return JSON.parse(localStorage.getItem('todos'))
+}
+
 export const useTodo = () => {
-    const [todos, dispatch] = useReducer( reducerTodo , [])
+    const [todos, dispatch] = useReducer( reducerTodo , [], initializer)
+
+    useEffect(() =>  {
+        localStorage.setItem('todos', JSON.stringify(todos))
+    },[todos])
+
 
     const handleAddTodo = (todo) => {
         dispatch({
@@ -10,8 +19,23 @@ export const useTodo = () => {
             description: todo
         })
     } 
+
+    const handleRemoveTodo = id => {
+        dispatch({
+            type:'[TODO]: remove todo',
+            description: id
+        })
+    }
+
+    const handleToggleTodo = id => {
+        console.log(id)
+    }
+
     return {
         todos,
-        handleAddTodo
+        allTodos: todos.length,
+        handleAddTodo,
+        handleRemoveTodo,
+        handleToggleTodo
     }
 }
