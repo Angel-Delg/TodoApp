@@ -6,7 +6,8 @@ const initializer = () => {
 }
 
 export const useTodo = () => {
-    const [todos, dispatch] = useReducer( reducerTodo , [], initializer)
+
+    const [todos, dispatch] = useReducer( reducerTodo , [] , initializer )
 
     useEffect(() =>  {
         localStorage.setItem('todos', JSON.stringify(todos))
@@ -28,7 +29,10 @@ export const useTodo = () => {
     }
 
     const handleToggleTodo = id => {
-        console.log(id)
+        dispatch({
+            type:'[TODO]: toggle  todo',
+            description: id
+        })
     }
 
     return {
